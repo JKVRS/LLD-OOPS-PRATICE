@@ -3,6 +3,7 @@ package com.restApi.durgeshRestApiDemoController;
 import com.restApi.durgeshRestApiDemoEntity.courseEntity;
 import com.restApi.durgeshRestApiDemoServiceLayer.RestApiDemoServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,12 @@ import java.util.List;
 public class MyController {
 
 
-     @Autowired
+    @Qualifier("courseServiceImpl")
+    @Autowired
+
 //     @Autowired create the object of CourseServiceImpl and inject into serviceinterface acording the injuction rule
-      public RestApiDemoServiceInterface serviceinterface;
+    public RestApiDemoServiceInterface serviceinterface;
+
 //    create a method that will give all the list of courses
     @GetMapping("/course")
     public List<courseEntity> getAllCourses(){
@@ -37,6 +41,7 @@ public class MyController {
     @PostMapping("/addCourse")
     public courseEntity addNewCourse(@RequestBody courseEntity ce)
     {
+
         return this.serviceinterface.addNewCourse(ce);
     }
 
